@@ -4,6 +4,7 @@ import "../globals.css"
 import { cn } from "@/lib/utils"
 import { FlashToast } from "@/lib/toast"
 import Navbar from "./seller/_components/Navbar"
+import Sidebar from "./seller/_components/Sidebar"
 
 const fontSans = FontSans({
     subsets: ["latin"],
@@ -29,9 +30,12 @@ function SellerLayout({
                 )}
             >
                 <Navbar />
-                <main className="flex flex-1 flex-col gap-4 p-6">
-                    {children}
-                </main>
+                <div className="flex flex-1">
+                    <Sidebar />
+                    <main className="flex flex-1 flex-col gap-4 p-6">
+                        {children}
+                    </main>
+                </div>
             </body>
         </html>
     )

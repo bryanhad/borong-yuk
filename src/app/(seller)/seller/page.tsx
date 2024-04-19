@@ -1,9 +1,16 @@
+import { db } from '@/lib/db'
 import React from 'react'
 
-function HomePage() {
+async function getSalesData() {
+  const data = await db.order.aggregate({
+    where: {}
+  })
+}
+
+function DashboardPage() {
   return (
-    <div>HomePage</div>
+    <div>DashboardPage</div>
   )
 }
 
-export default HomePage
+export default DashboardPage

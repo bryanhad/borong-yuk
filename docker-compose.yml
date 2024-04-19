@@ -1,0 +1,6 @@
+version: "3"
+services:
+  borong-yuk:
+    build: .
+    ports:
+      - "5000:3000"

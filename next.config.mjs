@@ -1,11 +1,9 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-    output: 'standalone',
+    output: "standalone",
     images: {
-        remotePatterns: [
-            {hostname: 'https://github.com'}
-        ]
-    }
-};
+        remotePatterns: [{ hostname: "https://github.com" }],
+    },
+}
 
-export default nextConfig;
+export default nextConfig

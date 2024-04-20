@@ -1,4 +1,5 @@
 import { Button } from "@/components/ui/button"
+import Main from "@/components/ui/main"
 import { Switch } from "@/components/ui/switch"
 import {
     Table,
@@ -15,7 +16,7 @@ import Link from "next/link"
 
 function SellerProductsPage() {
     return (
-        <div className="flex h-full flex-col">
+        <Main classname="flex flex-1 flex-col ">
             <div className="mb-6 flex justify-between">
                 <h1 className="text-2xl font-bold">Your Products</h1>
                 <Button asChild variant="outline">
@@ -23,7 +24,7 @@ function SellerProductsPage() {
                 </Button>
             </div>
             <ProductsTable />
-        </div>
+        </Main>
     )
 }
 
@@ -38,7 +39,7 @@ async function ProductsTable() {
     const products = await getProductsData()
 
     return (
-        <Table className="flex-shrink-0">
+        <Table containerClassName="bg-white rounded-md shadow-md flex-1 p-4">
             <TableHeader>
                 <TableRow>
                     <TableHead>Product Info</TableHead>
@@ -48,7 +49,7 @@ async function ProductsTable() {
                     <TableHead className="w-[200px]"></TableHead>
                 </TableRow>
             </TableHeader>
-            <TableBody className="h-full overflow-y-auto">
+            <TableBody className="h-full">
                 {products.map((product) => (
                     <TableRow key={product.id}>
                         <TableCell className="font-medium">
@@ -58,13 +59,13 @@ async function ProductsTable() {
                                     src={product.imagePath}
                                     height={100}
                                     width={100}
-                                    className="rounded-md"
+                                    className="h-24 w-24 rounded-md object-cover"
                                 />
-                                <div className="max-w-[200px] space-y-1">
+                                <div className="flex-1 space-y-1 overflow-hidden">
                                     <p className="truncate font-semibold">
                                         {product.name}
                                     </p>
-                                    <p className="truncate font-light">
+                                    <p className="max-w-max truncate font-light">
                                         ID: {product.id}
                                     </p>
                                 </div>

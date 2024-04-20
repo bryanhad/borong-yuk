@@ -16,9 +16,10 @@ datasource db {
 model Product {
     id                    String   @id @default(uuid())
     name                  String
-    priceInCents          Int
     imagePath             String
     description           String
+    priceInRupiah         Int
+    stock                 Int
     isAvailableForPuchase Boolean  @default(false)
     createdAt             DateTime @default(now())
     updatedAt             DateTime @updatedAt
@@ -61,11 +62,11 @@ model User {
 }
 
 model Order {
-    id               String   @id @default(uuid())
-    pricePaidInCents Int
-    createdAt        DateTime @default(now())
-    updatedAt        DateTime @updatedAt
-    status           String   @default("WAITING_FOR_APPROVAL")
+    id                String   @id @default(uuid())
+    pricePaidInRupiah Int
+    createdAt         DateTime @default(now())
+    updatedAt         DateTime @updatedAt
+    status            String   @default("WAITING_FOR_APPROVAL")
 
     userId    String
     productId String

@@ -4,11 +4,11 @@ import { db } from "@/lib/db"
 
 async function getSalesData() {
     const data = await db.product.aggregate({
-        _sum: { priceInCents: true },
+        _sum: { priceInRupiah: true },
         _count: true,
     })
     return {
-        totalSales: (data._sum.priceInCents || 0) / 100,
+        totalSales: (data._sum.priceInRupiah || 0) / 100,
         numberOfSales: data._count,
     }
 }

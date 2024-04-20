@@ -1,18 +1,15 @@
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
+import { Button } from "@/components/ui/button"
+import { Separator } from "@/components/ui/separator"
 import {
     Sheet,
     SheetContent,
-    SheetDescription,
-    SheetHeader,
-    SheetTitle,
-    SheetTrigger,
+    SheetTrigger
 } from "@/components/ui/sheet"
+import { LogOut, Settings } from "lucide-react"
+import { SaleNotifications } from "./NotificationPopover"
 import { SidebarLinks, SidebarSellerInfo } from "./Sidebar"
-import { Separator } from "@/components/ui/separator"
 import SidebarLink from "./SidebarLink"
-import { Settings, LogOut } from "lucide-react"
-import { Button } from "@/components/ui/button"
-import { SaleNotification } from "./NotificationPopover"
 
 function MobileMenu() {
     return (
@@ -28,7 +25,7 @@ function MobileMenu() {
                 <Separator className="w-[80%] self-center" />
                 <SidebarLinks />
                 <Separator className="w-[80%] self-center" />
-                <SaleNotification />
+                <SaleNotifications />
                 <Separator className="w-[80%] self-center" />
                 <SidebarLink href={"/seller/settings"} icon={<Settings />}>
                     User Settings

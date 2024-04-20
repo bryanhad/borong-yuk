@@ -16,7 +16,7 @@ function Navbar() {
                         </span>
                     </h1>
                 </Link>
-                <div className="hidden gap-2 lg:flex">
+                <div className="hidden gap-5 lg:flex">
                     <NotificationPopover />
                     <Separator
                         orientation="vertical"

@@ -5,46 +5,74 @@
 // Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
 
 generator client {
-  provider = "prisma-client-js"
+    provider = "prisma-client-js"
 }
 
 datasource db {
-  provider = "sqlite"
-  url      = "file:db/dev.db"
+    provider = "sqlite"
+    url      = "file:db/dev.db"
 }
 
 model Product {
-  id                    String   @id @default(uuid())
-  name                  String
-  priceInCents          Int
-  imagePath             String
-  description           String
-  isAvailableForPuchase Boolean  @default(true)
-  createdAt             DateTime @default(now())
-  updatedAt             DateTime @default(now())
-  orders                 Order[]
+    id                    String   @id @default(uuid())
+    name                  String
+    priceInCents          Int
+    imagePath             String
+    description           String
+    isAvailableForPuchase Boolean  @default(false)
+    createdAt             DateTime @default(now())
+    updatedAt             DateTime @updatedAt
+    orders                Order[]
+    storeId               String
+    // If a store is deleted, delete all associated products
+    store                 Store    @relation(fields: [storeId], references: [id], onDelete: Cascade)
+
+    @@map("products")
+}
+
+model Store {
+    id        String    @id @default(uuid())
+    name      String
+    imagePath String
+    createdAt DateTime  @default(now())
+    updatedAt DateTime  @updatedAt
+    products  Product[]
+    userId    String    @unique
+    // if user is going to be deleted, but user has a store, 
+    user      User      @relation(fields: [userId], references: [id], onDelete: Restrict)
+
+    @@map("stores")
 }
 
 model User {
-  id        String   @id @default(uuid())
-  email     String   @unique
-  password  String
-  createdAt DateTime @default(now())
-  updatedAt DateTime @default(now())
-  orders    Order[]
+    id          String   @id @default(uuid())
+    name        String
+    picturePath String?
+    role        String   @default("CUSTOMER")
+    email       String   @unique
+    password    String?
+    createdAt   DateTime @default(now())
+    updatedAt   DateTime @updatedAt
+    orders      Order[]
+    provider    String   @default("CREDENTIALS")
+    store       Store?
+
+    @@map("users")
 }
 
 model Order {
-  id               String   @id @default(uuid())
-  pricePaidInCents Int
-  createdAt        DateTime @default(now())
-  updatedAt        DateTime @default(now())
-  status String @default("WAITING_FOR_APPROVAL")
+    id               String   @id @default(uuid())
+    pricePaidInCents Int
+    createdAt        DateTime @default(now())
+    updatedAt        DateTime @updatedAt
+    status           String   @default("WAITING_FOR_APPROVAL")
 
-  userId    String
-  productId String
-  // if User is deleted, delete the associated orders
-  user      User    @relation(fields: [userId], references: [id], onDelete: Cascade)
-  // if product is deleted, but it still has associated order, don't allow deletion
-  product   Product @relation(fields: [productId], references: [id], onDelete: Restrict)
+    userId    String
+    productId String
+    // if User is deleted, delete the associated orders
+    user      User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+    // if product is deleted, but it still has associated order, don't allow deletion
+    product   Product @relation(fields: [productId], references: [id], onDelete: Restrict)
+
+    @@map("orders")
 }

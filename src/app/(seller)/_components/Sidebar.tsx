@@ -8,7 +8,7 @@ import { cn } from "@/lib/utils"
 
 function Sidebar() {
     return (
-        <aside className="w-64 bg-white hidden lg:block">
+        <aside className="w-64 bg-white hidden shadow-md lg:block">
             <SidebarSellerInfo />
             <Separator className="mb-4" />
             <SidebarLinks />

@@ -24,14 +24,14 @@ export default function RootLayout({
         <html lang="en">
             <body
                 className={cn(
-                    "flex min-h-screen flex-col bg-background bg-slate-400 font-sans antialiased",
+                    "flex min-h-screen flex-col bg-slate-100 font-sans antialiased",
                     fontSans.variable,
                 )}
             >
                 <Navbar />
                 <div className="flex grow">
                     <Sidebar />
-                    <main className="flex flex-1 p-6">{children}</main>
+                    <main className="flex-1 p-6">{children}</main>
                 </div>
                 <FlashToast />
             </body>

@@ -9,3 +9,11 @@ export enum Providers {
     Google = "GOOGLE",
     Github = "GITHUB",
 }
+
+export enum OrderStatus {
+    WaitingForApproval = "WAITING_FOR_APPROVAL",
+    OnProcess = "ON_PROCESS",
+    OnDelivery = "ON_DELIVERY",
+    ArrivedOnCustomer = "ARRIVED_ON_CUSTOMER",
+    Canceled = "CANCELED"
+}

@@ -1,14 +1,56 @@
-import { Providers, Roles } from "@/types";
-import { Product, User } from "@prisma/client";
+import { OrderStatus, Providers, Roles } from "../src/types";
+import { Order, Product, Store, User } from "@prisma/client";
 
-// export const placeholderProducts: Omit<Product, "id" |"createdAt" | "updatedAt" |  >[] = [
-//     {
+export const placeholderStores: Omit<Store, "createdAt" | "updatedAt">[] = [
+    {
+        id: "1236-warung-jarwo-sukses-mantab",
+        imagePath: "/stores/warung-jarwo.png",
+        name: "Warung Jarwo Sukses Mantab",
+        userId: "1234-bang-jarwo-supriatni-ningrat",
+    }
+]
 
-//     }
-// ]
+export const placeholderProducts: Omit<Product, "createdAt" | "updatedAt">[] = [
+    {
+        id: "1237-bakso-malang-frozen",
+        name: "Bakso Malang Frozen",
+        description: "Bakso khas malang yang menggiurkan semua kalangan manusia",
+        imagePath: "/products/bakso-malang-jarwo.png",
+        isAvailableForPuchase: true,
+        priceInCents: 12000,
+        storeId: "1236-warung-jarwo-sukses-mantab"
+    },
+    {
+        id: "1238-motor-mio",
+        name: "Motor Mio",
+        description: "Motor mio bekas saya 27 tahun",
+        imagePath: "/products/motor-miu-bang-jarwo.png",
+        isAvailableForPuchase: false,
+        priceInCents: 7550000,
+        storeId: "1236-warung-jarwo-sukses-mantab"
+    },
+]
 
-export const placeholderUsers: Omit<User, "createdAt" | "updatedAt" | "id" >[] = [
+export const placeHolderOrders: Omit<Order, "createdAt" | "updatedAt">[] = [
+    {
+        id: "1239-aeoufnaeoifne",
+        productId: "1237-bakso-malang-frozen",
+        status: OrderStatus.WaitingForApproval,
+        pricePaidInCents: 12000,
+        userId: "1235-jarjit-ala-bin-mail"
+    },
+    {
+        id: "1240-qwih0qpeiafro",
+        productId: "1238-motor-mio",
+        status: OrderStatus.WaitingForApproval,
+        pricePaidInCents: 7550000,
+        userId: "1235-jarjit-ala-bin-mail"
+    },
+]
+
+export const placeholderUsers: Omit<User, "createdAt" | "updatedAt">[] = [
     {   
+        id: "1234-bang-jarwo-supriatni-ningrat",
         name: "Bang Jarwo Supriatni Ningrat",
         role: Roles.Seller,
         email: "bangjarwo@gmail.com",
@@ -17,11 +59,12 @@ export const placeholderUsers: Omit<User, "createdAt" | "updatedAt" | "id" >[] =
         provider: Providers.Credentials,
     },
     {   
+        id: "1235-jarjit-ala-bin-mail",
         name: "Jarjit Ala Bin Mail",
-        role: Roles.Seller,
+        role: Roles.Customer,
         email: "jarjit@gmail.com",
         password: "jarjit",
-        picturePath: "/users/jarjit.jpg",
+        picturePath: "/users/jarjit.png",
         provider: Providers.Credentials,
     }
 ]

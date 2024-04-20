@@ -18,7 +18,7 @@ function UserPopover() {
                     </p>
                 </div>
             </Button>
-            <div className="absolute bottom-[1px] right-0 max-h-0 w-72 translate-y-full overflow-hidden shadow-md duration-300 group-hover:max-h-[400px]">
+            <div className="absolute bottom-[1px] right-0 z-50 max-h-0 w-72 translate-y-full overflow-hidden shadow-md duration-300 group-hover:max-h-[400px]">
                 <Separator />
                 <div className="flex flex-col gap-2 rounded-b-lg bg-white p-4 shadow-md">
                     <UserInfo />

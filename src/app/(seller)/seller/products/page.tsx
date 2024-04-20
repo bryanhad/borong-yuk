@@ -19,7 +19,7 @@ function SellerProductsPage() {
         <Main classname="flex flex-1 flex-col ">
             <div className="mb-6 flex justify-between">
                 <h1 className="text-2xl font-bold">Your Products</h1>
-                <Button asChild variant="outline">
+                <Button asChild variant="success">
                     <Link href="/seller/add-product">+ Add Product</Link>
                 </Button>
             </div>

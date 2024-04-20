@@ -29,11 +29,9 @@ export default function RootLayout({
                 )}
             >
                 <Navbar />
-                <div className="grow flex">
+                <div className="flex grow">
                     <Sidebar />
-                    <main className="flex flex-1 p-6">
-                        {children}
-                    </main>
+                    <main className="flex flex-1 p-6">{children}</main>
                 </div>
                 <FlashToast />
             </body>

@@ -8,7 +8,7 @@ function UserPopover() {
     return (
         <div className="group relative flex cursor-pointer items-center">
             <Button variant={"ghost"}>
-                <div className="max-w-40 flex">
+                <div className="flex max-w-40">
                     <Avatar className="mr-2 size-5">
                         <AvatarImage src="https://github.com/shadcn.png" />
                         <AvatarFallback>CN</AvatarFallback>

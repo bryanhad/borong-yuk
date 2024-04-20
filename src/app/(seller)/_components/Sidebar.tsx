@@ -28,7 +28,7 @@ export function SidebarLinks({ className }: { className?: string }) {
                 Products
             </SidebarLink>
             <SidebarLink icon={<ClipboardList />} href={"/seller/orders"}>
-                ClipboardList
+                Orders
             </SidebarLink>
         </div>
     )

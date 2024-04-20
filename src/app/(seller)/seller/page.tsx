@@ -1,9 +1,26 @@
-import React from 'react'
+import React from "react"
+import DashboardCard from "../_components/DashboardCard"
+import { db } from "@/lib/db"
 
-function SellerDashboard() {
-  return (
-    <div>SellerDashboard</div>
-  )
+async function getSalesData() {
+    const data = await db.product.aggregate({
+        _sum: { priceInCents: true },
+        _count: true,
+    })
+    return {
+        totalSales: (data._sum.priceInCents || 0) / 100,
+        numberOfSales: data._count,
+    }
+}
+
+async function SellerDashboard() {
+    const salesData = await getSalesData() 
+
+    return (
+        <div>
+            <DashboardCard title="Sales" subTitle={0} body={0} />
+        </div>
+    )
 }
 
 export default SellerDashboard

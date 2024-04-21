@@ -4,7 +4,7 @@ import { Order, Product, Store, User } from "@prisma/client"
 export const placeholderStores: Omit<Store, "createdAt" | "updatedAt">[] = [
     {
         id: "1236-warung-jarwo-sukses-mantab",
-        imagePath: "/stores/warung-jarwo.png",
+        imagePath: "/placeholder/warung-jarwo.png",
         name: "Warung Jarwo Sukses Mantab",
         userId: "1234-bang-jarwo-supriatni-ningrat",
     },
@@ -16,7 +16,7 @@ export const placeholderProducts: Omit<Product, "createdAt" | "updatedAt">[] = [
         name: "Bakso Malang Frozen",
         description:
             "Bakso khas malang yang menggiurkan semua kalangan manusia",
-        imagePath: "/products/bakso-malang-jarwo.png",
+        imagePath: "/placeholder/bakso-malang-jarwo.png",
         isAvailableForPuchase: true,
         priceInRupiah: 12000,
         stock: 234,
@@ -26,7 +26,7 @@ export const placeholderProducts: Omit<Product, "createdAt" | "updatedAt">[] = [
         id: "1238-motor-mio",
         name: "Motor Mio",
         description: "Motor mio bekas saya 27 tahun",
-        imagePath: "/products/motor-miu-bang-jarwo.png",
+        imagePath: "/placeholder/motor-miu-bang-jarwo.png",
         isAvailableForPuchase: false,
         priceInRupiah: 7550000,
         stock: 2,

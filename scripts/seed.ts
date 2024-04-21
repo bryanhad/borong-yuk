@@ -21,6 +21,7 @@ async function seedUsers() {
             })
         }),
     )
+    console.log("success!")
 }
 async function seedStores() {
     await Promise.all(
@@ -34,6 +35,7 @@ async function seedStores() {
             })
         }),
     )
+    console.log("success!")
 }
 async function seedProducts() {
     await Promise.all(
@@ -47,6 +49,7 @@ async function seedProducts() {
             })
         }),
     )
+    console.log("success!")
 }
 async function seedOrders() {
     await Promise.all(
@@ -60,31 +63,32 @@ async function seedOrders() {
             })
         }),
     )
+    console.log("success!")
 }
 
 async function main() {
+    console.log('Seeding users...')
     await Promise.all([
         fs.mkdir("public/users", { recursive: true }),
         seedUsers(),
     ])
-    console.log("Successfully seeded users")
+    console.log('Seeding stores...')
     await Promise.all([
         fs.mkdir("public/stores", { recursive: true }),
         seedStores(),
     ])
-    console.log("Successfully seeded stores")
+    console.log('Seeding products...')
     await Promise.all([
         fs.mkdir("public/products", { recursive: true }),
         seedProducts(),
     ])
-    console.log("Successfully seeded products")
+    console.log('Seeding orders...')
     await seedOrders()
-    console.log("Successfully seeded orders")
 }
 
 main()
     .then(() => {
-        console.log("SUCCESSFULLY SEEDED DATABASE")
+        console.log("~ SUCCESSFULLY SEEDED DATABASE ~")
     })
     .catch((err) => {
         console.error(err)

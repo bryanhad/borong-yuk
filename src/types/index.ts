@@ -17,3 +17,8 @@ export enum OrderStatus {
     ArrivedOnCustomer = "ARRIVED_ON_CUSTOMER",
     Canceled = "CANCELED"
 }
+
+export enum Conditions {
+    New = "NEW",
+    Used = "USED"
+}

@@ -1,4 +1,4 @@
-import { OrderStatus, Providers, Roles } from "../src/types"
+import { Conditions, OrderStatus, Providers, Roles } from "../src/types"
 import { Order, Product, Store, User } from "@prisma/client"
 
 export const placeholderStores: Omit<Store, "createdAt" | "updatedAt">[] = [
@@ -21,6 +21,9 @@ export const placeholderProducts: Omit<Product, "createdAt" | "updatedAt">[] = [
         priceInRupiah: 12000,
         stock: 234,
         storeId: "1236-warung-jarwo-sukses-mantab",
+        condition: Conditions.New,
+        videoUrl:
+            "https://www.youtube.com/watch?v=9SR_923uMIU&ab_channel=AnakKuliner",
     },
     {
         id: "1238-motor-mio",
@@ -31,6 +34,9 @@ export const placeholderProducts: Omit<Product, "createdAt" | "updatedAt">[] = [
         priceInRupiah: 7550000,
         stock: 2,
         storeId: "1236-warung-jarwo-sukses-mantab",
+        condition: Conditions.Used,
+        videoUrl:
+            "https://www.youtube.com/watch?v=TFYslmdjQk0&ab_channel=GiovanniTobia",
     },
 ]
 

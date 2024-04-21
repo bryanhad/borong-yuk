@@ -38,3 +38,6 @@ next-env.d.ts
 
 /prisma/migrations
 /prisma/db
+/public/stores
+/public/users
+/public/products

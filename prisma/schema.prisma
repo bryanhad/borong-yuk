@@ -18,6 +18,8 @@ model Product {
     name                  String
     imagePath             String
     description           String
+    videoUrl              String?
+    condition             String
     priceInRupiah         Int
     stock                 Int
     isAvailableForPuchase Boolean  @default(false)

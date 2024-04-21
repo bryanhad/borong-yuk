@@ -31,3 +31,7 @@ export function formatToSlug(str: string) {
     // the first regex replace all spaces into -
     // the second regex replaces all - that is more than 1 to be an empty string
 }
+
+export function capitalizeFirstLetter(value: string): string {
+    return value.charAt(0).toUpperCase() + value.slice(1).toLowerCase();
+}

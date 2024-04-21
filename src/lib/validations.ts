@@ -1,3 +1,4 @@
+import { Conditions } from "@/types"
 import { z } from "zod"
 
 export const imageSchema = z
@@ -16,22 +17,26 @@ export const imageSchema = z
 export const addProductSchema = z.object({
     name: z
         .string()
-        .min(1, "Product name is required.")
+        .min(1, "Product name is required")
         .refine((val) => val.length <= 255, {
-            message: "Product's name is too long.",
+            message: "Product's name is too long",
         }),
     image: imageSchema,
-    category: z.string().min(1, "Please pick a category."),
-    condition: z.string().min(1, `Please select product's condition.`),
-    description: z
+    // category: z.string().min(1, "Please pick a category"),
+    condition: z
         .string()
-        .min(250, `Product's description is too short. No bueno.`),
+        .min(1, `Please select product's condition`)
+        .refine(
+            (input) => (Object.values(Conditions) as string[]).includes(input),
+            { message: "Invalid product condition" },
+        ),
+    description: z.string().min(1, `Product's description is too short`),
     videoUrl: z.string().url().optional().or(z.literal("")),
-    // priceInRupiah: z.coerce
-    //     .number()
-    //     .min(100, "Minimum price of a product is Rp 100"),
-    // status: z.coerce.boolean(),
-    // stock: z.coerce.number(),
+    priceInRupiah: z.coerce
+        .number()
+        .min(100, "Minimum price of a product is Rp 100"),
+    isAvailableForPuchase: z.coerce.boolean(),
+    stock: z.coerce.number(),
 })
 
 export type AddProductValues = z.infer<typeof addProductSchema>

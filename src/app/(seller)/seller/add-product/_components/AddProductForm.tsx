@@ -28,7 +28,7 @@ import { useRouter } from "next/navigation"
 
 function AddProductForm() {
     const router = useRouter()
-    
+
     const form = useForm<AddProductValues>({
         resolver: zodResolver(addProductSchema),
         defaultValues: {
@@ -44,14 +44,22 @@ function AddProductForm() {
         const formData = new FormData()
         Object.entries(values).forEach(([key, value]) => {
             if (value instanceof File === false) {
-                formData.append(key, String(value))
+                if (!!value) {
+                    formData.append(key, String(value))
+                }
             } else {
                 formData.append(key, value)
             }
         })
-        await addProduct(formData)
-        toast.success("Successfully added product!")
-        router.push('/seller/products')
+        try {
+            await addProduct(formData)
+            toast.success("Successfully added product!")
+            router.push("/seller/products")
+        } catch (err) {
+            toast.error(
+                `Oops, something went wrong. ERROR:${JSON.stringify(err)}`,
+            )
+        }
     }
 
     // DONT JUDGE ME :D, AS LONG AS IT! WORKS AM I RITE????
@@ -76,7 +84,10 @@ function AddProductForm() {
     return (
         <Form {...form}>
             {/* noValidate will disable browser's native validation, cuz we want to use our own JS based valdiation dammit! */}
-            <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
+            <form
+                onSubmit={form.handleSubmit(onSubmit)}
+                className="space-y-8 rounded-md bg-white p-6 shadow-md"
+            >
                 <FormField
                     control={form.control}
                     name="name"

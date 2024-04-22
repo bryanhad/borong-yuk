@@ -9,7 +9,7 @@ function Main({
     children: React.ReactNode
 }) {
     return (
-        <main className={cn("p-6", classname)}>
+        <main className={cn("p-6 w-full", classname)}>
             {children}
         </main>
     )

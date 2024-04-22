@@ -11,11 +11,9 @@ import { Lightbulb } from "lucide-react"
 import AddProductForm from "./_components/AddProductForm"
 
 function AddProductPage() {
-
-
     return (
-        <Main>
-            <div className="flex justify-between">
+        <Main >
+            <div className="flex">
                 <Title className="mr-2">Add Product</Title>
                 <AddProductTips />
             </div>

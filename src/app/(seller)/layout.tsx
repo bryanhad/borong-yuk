@@ -5,6 +5,7 @@ import { cn } from "@/lib/utils"
 import { FlashToast } from "@/lib/toast"
 import Navbar from "./_components/Navbar"
 import Sidebar from "./_components/Sidebar"
+import Script from "next/script"
 
 const fontSans = FontSans({
     subsets: ["latin"],
@@ -29,12 +30,17 @@ export default function RootLayout({
                 )}
             >
                 <Navbar />
-                <div className="flex flex-col lg:flex-row flex-1">
+                <div className="flex flex-1 flex-col lg:flex-row">
                     <Sidebar />
                     {children}
                 </div>
                 <FlashToast />
             </body>
+            <Script
+                type="text/javascript"
+                src="https://app.sandbox.midtrans.com/snap/snap.js"
+                data-client-key={process.env.SANDBOX_CLIENT_KEY}
+            />
         </html>
     )
 }

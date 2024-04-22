@@ -1,4 +1,4 @@
-import { Button } from '@/components/ui/button'
+import { Button } from "@/components/ui/button"
 import {
     Dialog,
     DialogContent,
@@ -6,13 +6,15 @@ import {
     DialogHeader,
     DialogTitle,
     DialogTrigger,
-} from '@/components/ui/dialog'
+} from "@/components/ui/dialog"
 
 type ModalProps = {
     children: React.ReactNode
     // disableDefaultModalClose?: boolean
-    title: string
+    title?: string
     desc?: string
+    open?: boolean
+    onOpenChange?: (open: boolean) => void
 } & (
     | { buttonText: string; buttonCustom?: never }
     | {
@@ -22,6 +24,8 @@ type ModalProps = {
 )
 
 function Modal({
+    open,
+    onOpenChange,
     children,
     buttonCustom,
     buttonText,
@@ -30,13 +34,15 @@ function Modal({
 }: // disableDefaultModalClose = false,
 ModalProps) {
     return (
-        <Dialog>
-            <DialogTrigger asChild>
-                <Button variant={'outline'}>
-                    {buttonText && buttonText}
-                    {buttonCustom && buttonCustom}
-                </Button>
-            </DialogTrigger>
+        <Dialog open={open} onOpenChange={onOpenChange}>
+            {buttonCustom && (
+                <DialogTrigger asChild>{buttonCustom}</DialogTrigger>
+            )}
+            {buttonText && (
+                <DialogTrigger asChild>
+                    <Button variant={"outline"}>{buttonText}</Button>
+                </DialogTrigger>
+            )}
             <DialogContent className="sm:max-w-md">
                 <DialogHeader>
                     <DialogTitle>{title}</DialogTitle>

@@ -35,10 +35,3 @@ export function formatToSlug(str: string) {
 export function capitalizeFirstLetter(value: string): string {
     return value.charAt(0).toUpperCase() + value.slice(1).toLowerCase()
 }
-
-export const loadScript = (src: string, callback: () => void) => {
-    const script = document.createElement("script")
-    script.src = src
-    script.onload = callback
-    document.body.appendChild(script)
-}

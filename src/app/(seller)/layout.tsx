@@ -1,11 +1,10 @@
+import "@/app/globals.css"
+import { FlashToast } from "@/lib/toast"
+import { cn } from "@/lib/utils"
 import type { Metadata } from "next"
 import { Inter as FontSans } from "next/font/google"
-import "@/app/globals.css"
-import { cn } from "@/lib/utils"
-import { FlashToast } from "@/lib/toast"
 import Navbar from "./_components/Navbar"
 import Sidebar from "./_components/Sidebar"
-import Script from "next/script"
 
 const fontSans = FontSans({
     subsets: ["latin"],
@@ -36,11 +35,7 @@ export default function RootLayout({
                 </div>
                 <FlashToast />
             </body>
-            <Script
-                type="text/javascript"
-                src="https://app.sandbox.midtrans.com/snap/snap.js"
-                data-client-key={process.env.SANDBOX_CLIENT_KEY}
-            />
+
         </html>
     )
 }

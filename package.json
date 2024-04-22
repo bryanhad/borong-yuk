@@ -11,7 +11,8 @@
         "migrate:create": "prisma migrate dev --create-only",
         "migrate": "prisma migrate dev",
         "migrate:prod": "prisma migrate deploy",
-        "seed": "ts-node scripts/seed.ts"
+        "seed": "ts-node scripts/seed.ts",
+        "clean-db": "ts-node scripts/clear-db.ts"
     },
     "dependencies": {
         "@hookform/resolvers": "^3.3.4",

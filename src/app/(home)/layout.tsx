@@ -28,10 +28,12 @@ export default function RootLayout({
                 )}
             >
                 <Navbar />
-                <div className="relative flex-1 flex flex-col">
-                    <main className="p-6 flex-1">{children}</main>
+                <div className="relative flex flex-1 flex-col items-center">
+                    <main className="w-full max-w-[1320px] flex-1 p-6">
+                        {children}
+                    </main>
                     <div
-                        className={`absolute z-[100] h-full w-full duration-100 group-has-[figure:hover]/bodyTag:bg-black/40`}
+                        className={`absolute z-[-10] h-full w-full duration-100 group-has-[figure:hover]/bodyTag:z-[100] group-has-[figure:hover]/bodyTag:bg-black/40`}
                     />
                 </div>
                 <FlashToast />

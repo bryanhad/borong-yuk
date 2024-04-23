@@ -7,6 +7,7 @@ import {
     DialogTitle,
     DialogTrigger,
 } from "@/components/ui/dialog"
+import { cn } from "@/lib/utils"
 
 type ModalProps = {
     children: React.ReactNode
@@ -15,6 +16,8 @@ type ModalProps = {
     desc?: string
     open?: boolean
     onOpenChange?: (open: boolean) => void
+    className?: string
+    disableDefaultCloseButton?: boolean
 } & (
     | { buttonText: string; buttonCustom?: never }
     | {
@@ -31,6 +34,8 @@ function Modal({
     buttonText,
     title,
     desc,
+    className,
+    disableDefaultCloseButton,
 }: // disableDefaultModalClose = false,
 ModalProps) {
     return (
@@ -43,15 +48,21 @@ ModalProps) {
                     <Button variant={"outline"}>{buttonText}</Button>
                 </DialogTrigger>
             )}
-            <DialogContent className="sm:max-w-md">
-                <DialogHeader>
-                    <DialogTitle>{title}</DialogTitle>
-                    {desc && (
-                        <DialogDescription>
-                            Anyone who has this link will be able to view this.
-                        </DialogDescription>
-                    )}
-                </DialogHeader>
+            <DialogContent
+                disableDefaultCloseButton={disableDefaultCloseButton}
+                className={cn("sm:max-w-md", className)}
+            >
+                {(title || desc) && (
+                    <DialogHeader>
+                        <DialogTitle>{title}</DialogTitle>
+                        {desc && (
+                            <DialogDescription>
+                                Anyone who has this link will be able to view
+                                this.
+                            </DialogDescription>
+                        )}
+                    </DialogHeader>
+                )}
                 <div className="flex items-center space-x-2">{children}</div>
             </DialogContent>
         </Dialog>

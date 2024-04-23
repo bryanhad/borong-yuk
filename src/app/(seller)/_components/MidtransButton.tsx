@@ -6,7 +6,9 @@ import { getMidtransTransactionToken } from "@/lib/actions/payment"
 import Script from "next/script"
 import { useEffect, useRef, useState } from "react"
 import { toast } from "sonner"
+import { Loader2, CircleX } from "lucide-react"
 
+// extend the Window type to have the snap function available
 declare global {
     interface Window {
         snap?: {
@@ -27,19 +29,21 @@ declare global {
 
 function MidtransButton() {
     const [isModalOpen, setIsModalOpen] = useState(false)
+    const [isSnapError, setIsSnapError] = useState(false)
     const [isButtonDisabled, setIsButtonDisabled] = useState(true)
+    const [isLoading, setIsLoading] = useState(true)
     const buttonRef = useRef<HTMLButtonElement>(null)
 
     useEffect(() => {
         async function embedSnap() {
             try {
                 const snapToken = await getMidtransTransactionToken(
-                    "PRODUCT_ID_2",
+                    "PRODUCT_ID_3",
                     1,
                 )
                 if (window.snap) {
                     window.snap.embed(snapToken, {
-                        embedId: "snap-container",
+                        embedId: "snap-container", //the Id of the html div.
                         onSuccess: function (result) {
                             // alert("BERHASIL")
 
@@ -64,26 +68,29 @@ function MidtransButton() {
                         },
                     })
                 }
-                const snapHTMLElement = document.getElementById('snap-midtrans')
-                if (snapHTMLElement) {
-                    console.log('yeah')
-                    snapHTMLElement.style.width='800px'
-                }
             } catch (err) {
+                setIsSnapError(true)
                 toast.error(JSON.stringify(err))
                 console.log(err)
+            } finally {
+                setIsLoading(false)
             }
         }
         if (isModalOpen) {
+            setIsLoading(true)
             embedSnap()
         } else {
-            if (window.snap) window.snap.hide()
+            if (window.snap) {
+                window.snap.hide()
+                setIsSnapError(false)
+            }
         }
     }, [isModalOpen])
 
     return (
         <>
             <Modal
+                disableDefaultCloseButton
                 open={isModalOpen}
                 onOpenChange={async () => {
                     if (isModalOpen) {
@@ -101,8 +108,17 @@ function MidtransButton() {
                         SHOW SNAP MODAL
                     </Button>
                 }
+                className="p-0"
             >
-                <div id="snap-container" className="wfu"></div>
+                <div id="snap-container" className="flex min-h-[70vh] w-full">
+                    {isLoading ? (
+                        <div className="flex flex-1 items-center justify-center">
+                            <Loader2 size={60} className="animate-spin" />
+                        </div>
+                    ) : (
+                        isSnapError && <ErrorModalContent />
+                    )}
+                </div>
             </Modal>
             <Script
                 strategy="afterInteractive"
@@ -120,3 +136,13 @@ function MidtransButton() {
 }
 
 export default MidtransButton
+
+function ErrorModalContent() {
+    return (
+        <div className="flex flex-1 flex-col items-center space-y-2 text-destructive">
+            <CircleX size={110} />
+            <p className="text-xl font-semibold">Oh noose!</p>
+            <p>Something went wrong :(</p>
+        </div>
+    )
+}

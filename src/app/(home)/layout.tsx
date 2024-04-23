@@ -23,13 +23,16 @@ export default function RootLayout({
         <html lang="en">
             <body
                 className={cn(
-                    "flex min-h-screen flex-col bg-background font-sans antialiased",
+                    "group/bodyTag flex min-h-screen flex-col bg-background font-sans antialiased",
                     fontSans.variable,
                 )}
             >
-                <Navbar/>
-                <main className="flex flex-1 flex-col gap-4 p-6">
+                <Navbar />
+                <main className="relative flex flex-1 flex-col gap-4">
                     {children}
+                    <div
+                        className={`absolute z-[100] h-full w-full duration-100 group-has-[figure:hover]/bodyTag:bg-black/40`}
+                    />
                 </main>
                 <FlashToast />
             </body>

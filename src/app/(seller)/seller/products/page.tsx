@@ -83,7 +83,7 @@ async function ProductsTable() {
                                 />
                             </div>
                         </TableCell>
-                        <TableCell className="text-right">$250.00</TableCell>
+                        <TableCell className="text-right">{formatCurrency(product.priceInRupiah, 'IDR')}</TableCell>
                     </TableRow>
                 ))}
             </TableBody>

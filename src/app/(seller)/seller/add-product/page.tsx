@@ -12,7 +12,7 @@ import AddProductForm from "./_components/AddProductForm"
 
 function AddProductPage() {
     return (
-        <Main >
+        <Main classname="space-y-6">
             <div className="flex">
                 <Title className="mr-2">Add Product</Title>
                 <AddProductTips />

@@ -31,7 +31,7 @@ function MidtransButton() {
     const buttonRef = useRef<HTMLButtonElement>(null)
 
     useEffect(() => {
-        async function bruh() {
+        async function embedSnap() {
             try {
                 const snapToken = await getMidtransTransactionToken(
                     "PRODUCT_ID_2",
@@ -75,7 +75,7 @@ function MidtransButton() {
             }
         }
         if (isModalOpen) {
-            bruh()
+            embedSnap()
         } else {
             if (window.snap) window.snap.hide()
         }
@@ -102,7 +102,7 @@ function MidtransButton() {
                     </Button>
                 }
             >
-                <div id="snap-container" className="w-full"></div>
+                <div id="snap-container" className="wfu"></div>
             </Modal>
             <Script
                 strategy="afterInteractive"

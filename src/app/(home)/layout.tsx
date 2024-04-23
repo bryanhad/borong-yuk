@@ -3,6 +3,7 @@ import { Inter as FontSans } from "next/font/google"
 import "@/app/globals.css"
 import { cn } from "@/lib/utils"
 import { FlashToast } from "@/lib/toast"
+import Navbar from "./_components/Navbar"
 
 const fontSans = FontSans({
     subsets: ["latin"],
@@ -26,6 +27,7 @@ export default function RootLayout({
                     fontSans.variable,
                 )}
             >
+                <Navbar/>
                 <main className="flex flex-1 flex-col gap-4 p-6">
                     {children}
                 </main>

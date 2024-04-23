@@ -1,9 +1,8 @@
+import "@/app/globals.css"
+import { FlashToast } from "@/lib/toast"
+import { cn } from "@/lib/utils"
 import type { Metadata } from "next"
 import { Inter as FontSans } from "next/font/google"
-import "@/app/globals.css"
-import { cn } from "@/lib/utils"
-import { FlashToast } from "@/lib/toast"
-import Navbar from "./_components/Navbar"
 
 const fontSans = FontSans({
     subsets: ["latin"],
@@ -23,19 +22,16 @@ export default function RootLayout({
         <html lang="en">
             <body
                 className={cn(
-                    "group/bodyTag flex min-h-screen flex-col bg-background font-sans antialiased",
+                    "flex min-h-screen flex-col bg-slate-100 font-sans antialiased",
                     fontSans.variable,
                 )}
             >
-                <Navbar />
-                <div className="relative flex-1 flex flex-col">
-                    <main className="p-6 flex-1">{children}</main>
-                    <div
-                        className={`absolute z-[100] h-full w-full duration-100 group-has-[figure:hover]/bodyTag:bg-black/40`}
-                    />
+                <div className="flex flex-1 flex-col lg:flex-row">
+                    {children}
                 </div>
                 <FlashToast />
             </body>
+
         </html>
     )
 }

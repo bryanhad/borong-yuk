@@ -1,10 +1,9 @@
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
+import AuthOptions from "@/components/AuthOptions"
 import { Button } from "@/components/ui/button"
+import Modal from "@/components/ui/modal"
 import { Separator } from "@/components/ui/separator"
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet"
-import { ScanFace, Menu } from "lucide-react"
-import AuthOptions from "@/components/AuthOptions"
-import Modal from "@/components/ui/modal"
+import { Menu, ScanFace } from "lucide-react"
 
 function MobileMenu() {
     return (

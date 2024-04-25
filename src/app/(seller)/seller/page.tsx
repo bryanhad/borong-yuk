@@ -1,6 +1,6 @@
 import React from "react"
 import DashboardCard from "../_components/DashboardCard"
-import { db } from "@/lib/db"
+import db from "@/lib/db"
 import MidtransButton from "../_components/MidtransButton"
 
 async function getSalesData() {

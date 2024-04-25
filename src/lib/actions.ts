@@ -4,7 +4,7 @@ import { nanoid } from "nanoid"
 import sharp from "sharp"
 import { formatToSlug } from "./utils"
 import { addProductSchema } from "./validations"
-import { db } from "./db"
+import db from "./db"
 import { revalidatePath } from "next/cache"
 import { redirect } from "next/navigation"
 
@@ -41,7 +41,7 @@ export async function addProduct(formData: FormData) {
                 stock,
                 videoUrl,
                 isAvailableForPuchase,
-                imagePath: imageDestinationPath,
+                imagePath: imageDestinationPath, 
                 storeId: "1236-warung-jarwo-sukses-mantab",
             },
         })

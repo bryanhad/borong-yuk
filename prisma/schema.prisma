@@ -9,8 +9,9 @@ generator client {
 }
 
 datasource db {
-    provider = "sqlite"
-    url      = "file:db/dev.db"
+    provider  = "postgresql"
+    url       = env("DATABASE_URL") //Connect to Supabase via connection pooling, supports serverless / edge
+    directUrl = env("DIRECT_URL") //Connect to Supabase directly, for migrations
 }
 
 model Product {
@@ -47,22 +48,6 @@ model Store {
     @@map("stores")
 }
 
-model User {
-    id          String   @id @default(uuid())
-    name        String
-    picturePath String?
-    role        String   @default("CUSTOMER")
-    email       String   @unique
-    password    String?
-    createdAt   DateTime @default(now())
-    updatedAt   DateTime @updatedAt
-    orders      Order[]
-    provider    String   @default("CREDENTIALS")
-    store       Store?
-
-    @@map("users")
-}
-
 model Order {
     id                String   @id @default(uuid())
     pricePaidInRupiah Int
@@ -78,4 +63,69 @@ model Order {
     product   Product @relation(fields: [productId], references: [id], onDelete: Restrict)
 
     @@map("orders")
+}
+
+
+model User {
+    id            String    @id @default(cuid())
+    name          String
+    email         String    @unique
+    emailVerified DateTime?
+    image         String?
+    role          String    @default("CUSTOMER")
+
+    accounts Account[]
+    sessions Session[]
+
+    createdAt DateTime @default(now())
+    updatedAt DateTime @updatedAt
+
+    orders   Order[]
+    provider String  @default("CREDENTIALS")
+    store    Store?
+
+    @@map("users")
+}
+
+model Account {
+    userId            String
+    type              String
+    provider          String
+    providerAccountId String
+    refresh_token     String?
+    access_token      String?
+    expires_at        Int?
+    token_type        String?
+    scope             String?
+    id_token          String?
+    session_state     String?
+
+    createdAt DateTime @default(now())
+    updatedAt DateTime @updatedAt
+
+    user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+    @@id([provider, providerAccountId])
+    @@map("accounts")
+}
+
+model Session {
+    sessionToken String   @unique
+    userId       String
+    expires      DateTime
+    user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+    createdAt DateTime @default(now())
+    updatedAt DateTime @updatedAt
+
+    @@map("sessions")
+}
+
+model VerificationToken {
+    identifier String
+    token      String
+    expires    DateTime
+
+    @@id([identifier, token])
+    @@map("verivication_tokens")
 }

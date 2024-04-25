@@ -1,5 +1,7 @@
 import { Separator } from "@/components/ui/separator"
 import { cn } from "@/lib/utils"
+import { ReactHTMLElement } from "react"
+import * as React from "react"
 
 type NavItemDropdownProps = {
     children: React.ReactNode
@@ -8,14 +10,10 @@ type NavItemDropdownProps = {
     buttonTriggerClassName?: string
 }
 
-function NavItemDropdown({
-    buttonTrigger,
-    children,
-    className,
-    buttonTriggerClassName,
-}: NavItemDropdownProps) {
-    return (
+const NavItemDropdown = React.forwardRef<HTMLElement, NavItemDropdownProps>(
+    ({ className, children, buttonTrigger, buttonTriggerClassName }, ref) => (
         <figure
+            ref={ref}
             className={cn(
                 "group/navbarDropdownParent relative flex cursor-pointer items-center",
                 buttonTriggerClassName,
@@ -32,7 +30,8 @@ function NavItemDropdown({
                 <div className="p-4">{children}</div>
             </div>
         </figure>
-    )
-}
+    ),
+)
+NavItemDropdown.displayName = "NavItemDropdown"
 
 export default NavItemDropdown

@@ -1,7 +1,19 @@
 "use server"
 
 import { auth, signOut } from "@/auth"
-import { redirect } from "next/navigation"
+import { notFound, redirect } from "next/navigation"
+
+export async function redirectAll(
+    params: string[] | undefined,
+    redirectPath: string,
+    mustInclude:string
+) {
+    if (!params) {
+        redirect(redirectPath)
+    } else if (!params[0].includes(mustInclude)) {
+        notFound()
+    }
+}
 
 export async function mustLoggedIn(currentPathname?: string) {
     const session = await auth()

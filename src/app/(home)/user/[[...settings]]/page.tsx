@@ -1,4 +1,4 @@
-import { mustLoggedIn } from "@/lib/actions/auth"
+import { mustLoggedIn, redirectAll } from "@/lib/actions/auth"
 import { redirect } from "next/navigation"
 
 async function UserSettingsPage({
@@ -8,11 +8,7 @@ async function UserSettingsPage({
 }) {
     const pathnameArr = params["settings"]
 
-    if (!pathnameArr) {
-        redirect("/user/settings")
-    } else if (!pathnameArr[0].includes("settings")) {
-        redirect("/user/settings")
-    }
+    await redirectAll(pathnameArr, "/user/settings", "settings")
 
     const user = await mustLoggedIn("/user/settings")
 

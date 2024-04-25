@@ -1,5 +1,6 @@
 import { auth } from "@/auth"
 import AuthOptions from "@/components/AuthOptions"
+import { redirectAll } from "@/lib/actions/auth"
 import { notFound, redirect } from "next/navigation"
 
 async function SignInPage({
@@ -11,11 +12,7 @@ async function SignInPage({
 }) {
     const pathnameArr = params["sign-in"]
 
-    if (!pathnameArr) {
-        redirect("/auth/sign-in")
-    } else if (!pathnameArr[0].includes("sign-in")) {
-        notFound()
-    }
+    await redirectAll(pathnameArr, '/auth/sign-in', 'sign-in')
 
     const session = await auth()
     const user = session?.user

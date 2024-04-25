@@ -3,8 +3,8 @@ import { Button } from "@/components/ui/button"
 import { Separator } from "@/components/ui/separator"
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet"
 import { ScanFace, Menu } from "lucide-react"
-import Link from "next/link"
-import AuthButtons from "./AuthButtons"
+import AuthOptions from "@/components/AuthOptions"
+import Modal from "@/components/ui/modal"
 
 function MobileMenu() {
     return (
@@ -32,7 +32,9 @@ function MobileMenu() {
                     Consider Logging in!
                 </p>
                 <div className="flex justify-evenly gap-4 p-4">
-                    <AuthButtons />
+                    <Modal buttonText="Sign In">
+                        <AuthOptions />
+                    </Modal>
                 </div>
             </SheetContent>
         </Sheet>

@@ -35,3 +35,14 @@ export function formatToSlug(str: string) {
 export function capitalizeFirstLetter(value: string): string {
     return value.charAt(0).toUpperCase() + value.slice(1).toLowerCase()
 }
+
+export function getNameInitial(name:string) {
+    const formattedName = name.replace(/\s+/g, ' ').trim()
+
+    const words = formattedName.split(' ')
+
+    if (words.length === 1) {
+      return name[0]
+    }
+    return `${words[0][0]}${words[1][0]}`
+}

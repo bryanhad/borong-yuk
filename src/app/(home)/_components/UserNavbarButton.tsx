@@ -9,7 +9,7 @@ import { getNameInitial } from "@/lib/utils"
 import { VariantProps } from "class-variance-authority"
 import { LogOut } from "lucide-react"
 import Link, { LinkProps } from "next/link"
-import { useRouter } from "next/navigation"
+import { usePathname, useRouter } from "next/navigation"
 import { useRef } from "react"
 
 function NavLinkButton({
@@ -54,7 +54,9 @@ function UserNavbarButton({
     image: string | undefined
     name: string
 }) {
+    const pathname = usePathname()
     const dropDownRef = useRef<HTMLElement>(null)
+    const signOutFormAction = signOutAction.bind(null, pathname)
 
     return (
         <NavItemDropdown
@@ -112,10 +114,7 @@ function UserNavbarButton({
                         </NavLinkButton>
                     </div>
                 </div>
-                <form
-                    className="w-full"
-                    action={signOutAction}
-                >
+                <form className="w-full" action={signOutFormAction}>
                     <Button
                         type="submit"
                         className="flex w-full items-center gap-2"

@@ -1,5 +1,4 @@
 import "@/app/globals.css"
-import { FlashToast } from "@/lib/toast"
 import { cn } from "@/lib/utils"
 import type { Metadata } from "next"
 import { Inter as FontSans } from "next/font/google"
@@ -26,12 +25,10 @@ export default function RootLayout({
                     fontSans.variable,
                 )}
             >
-                <div className="flex flex-1 flex-col lg:flex-row">
+                <div className="flex flex-1 items-center justify-center">
                     {children}
                 </div>
-                <FlashToast />
             </body>
-
         </html>
     )
 }

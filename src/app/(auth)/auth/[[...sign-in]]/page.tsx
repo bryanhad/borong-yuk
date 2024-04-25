@@ -1,7 +1,14 @@
 import { auth } from "@/auth"
+import AuthOptions from "@/components/AuthOptions"
 import { notFound, redirect } from "next/navigation"
 
-async function SignInPage({ params }: { params: { "sign-in": string[] } }) {
+async function SignInPage({
+    params,
+    searchParams,
+}: {
+    searchParams: { callbackUrl: string }
+    params: { "sign-in": string[] }
+}) {
     const pathnameArr = params["sign-in"]
 
     if (!pathnameArr) {
@@ -17,7 +24,11 @@ async function SignInPage({ params }: { params: { "sign-in": string[] } }) {
         redirect("/")
     }
 
-    return <div>SignInPage {JSON.stringify(params["sign-in"])}</div>
+    return (
+        <div className="flex flex-col gap-4 rounded-xl bg-white p-6 shadow-md">
+            <AuthOptions redirectTo={searchParams.callbackUrl} />
+        </div>
+    )
 }
 
 export default SignInPage

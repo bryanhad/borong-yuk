@@ -1,7 +1,11 @@
 import { mustLoggedIn } from "@/lib/actions/auth"
 import { redirect } from "next/navigation"
 
-async function UserSettingsPage({ params }: { params: { settings: string[] } }) {
+async function UserSettingsPage({
+    params,
+}: {
+    params: { settings: string[] }
+}) {
     const pathnameArr = params["settings"]
 
     if (!pathnameArr) {
@@ -10,8 +14,8 @@ async function UserSettingsPage({ params }: { params: { settings: string[] } }) 
         redirect("/user/settings")
     }
 
-    const user = await mustLoggedIn()
-    
+    const user = await mustLoggedIn("/user/settings")
+
     return <div>UserSettingsPage {JSON.stringify(params)}</div>
 }
 

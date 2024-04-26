@@ -1,5 +1,7 @@
 import { mustLoggedIn, redirectAll } from "@/lib/actions/auth"
 import { redirect } from "next/navigation"
+import {User} from 'next-auth'
+import SettingsForm from "./SettingsForm"
 
 async function UserSettingsPage({
     params,
@@ -12,7 +14,9 @@ async function UserSettingsPage({
 
     const user = await mustLoggedIn("/user/settings")
 
-    return <div>UserSettingsPage {JSON.stringify(params)}</div>
+    return <div>
+        <SettingsForm user={user}/>
+    </div>
 }
 
 export default UserSettingsPage

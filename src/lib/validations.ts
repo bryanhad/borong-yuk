@@ -1,6 +1,14 @@
 import { Conditions } from "@/types"
 import { z } from "zod"
 
+export const updateCustomerProfileSchema = z.object({
+    name: z.string().trim().min(1, "Cannot be empty"),
+})
+
+export type UpdateCustomerProfileValues = z.infer<
+    typeof updateCustomerProfileSchema
+>
+
 export const imageSchema = z
     .custom<File>()
     .refine((input) => input, "Please select an image to upload")

@@ -4,6 +4,7 @@ import "@/app/globals.css"
 import { cn } from "@/lib/utils"
 import { FlashToast } from "@/lib/toast"
 import Navbar from "./_components/Navbar"
+import { Toaster } from "@/components/ui/toaster"
 
 const fontSans = FontSans({
     subsets: ["latin"],
@@ -36,6 +37,7 @@ export default function RootLayout({
                         className={`absolute z-[-10] h-full w-full duration-100 group-has-[figure:hover]/bodyTag:z-[100] group-has-[figure:hover]/bodyTag:bg-black/40`}
                     />
                 </div>
+                <Toaster />
                 <FlashToast />
             </body>
         </html>

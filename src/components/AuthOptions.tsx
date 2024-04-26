@@ -42,9 +42,6 @@ function AuthOptions({ redirectTo }: { redirectTo?: string }) {
                     <Button className="w-full">Sign in with Email</Button>
                 </div>
             </form>
-            {/* <Button asChild className="max-w-[200px] flex-1">
-                <Link href={"/sign-up"}>Sign Up</Link>
-            </Button> */}
         </>
     )
 }

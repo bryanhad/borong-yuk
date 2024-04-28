@@ -3,7 +3,7 @@ const nextConfig = {
     images: {
         remotePatterns: [
             { hostname: "https://github.com" },
-            { hostname: "lh3.googleusercontent.com" },
+            { hostname: "ik.imagekit.io", pathname: "/borongyuk/**" },
         ],
     },
 }

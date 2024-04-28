@@ -1,8 +1,11 @@
-import React from 'react'
+import { BiMessageError } from "react-icons/bi";
+import AuthModal from "../../_components/auth-modal";
 
 function AuthErrorPage() {
   return (
-    <div>AuthErrorPage</div>
+    <AuthModal>
+        <BiMessageError size={70} className="text-destructive"/>
+    </AuthModal>
   )
 }
 

@@ -8,7 +8,6 @@ import { signOutAction } from "@/lib/actions/auth"
 import { getNameInitial } from "@/lib/utils"
 import { VariantProps } from "class-variance-authority"
 import { LogOut } from "lucide-react"
-import Link, { LinkProps } from "next/link"
 import { usePathname, useRouter } from "next/navigation"
 import { useRef } from "react"
 
@@ -66,7 +65,7 @@ function UserNavbarButton({
                 <Button variant={"ghost"}>
                     <div className="flex max-w-40 items-center">
                         <Avatar className="mr-2 size-9">
-                            <AvatarImage src={image} />
+                            <AvatarImage className="object-cover" src={image} />
                             <AvatarFallback>
                                 {getNameInitial(name)}
                             </AvatarFallback>
@@ -79,7 +78,7 @@ function UserNavbarButton({
             <div className="flex flex-col items-center justify-center gap-4 p-1">
                 <div className="flex w-full items-center gap-2 rounded-md p-3 shadow-md">
                     <Avatar className="mr-2 size-10">
-                        <AvatarImage src={image} />
+                        <AvatarImage className="object-cover" src={image} />
                         <AvatarFallback>{getNameInitial(name)}</AvatarFallback>
                     </Avatar>
                     <div className="flex flex-col">

@@ -8,6 +8,8 @@ import db from "./db"
 import { revalidatePath } from "next/cache"
 import { redirect } from "next/navigation"
 
+
+
 export async function addProduct(formData: FormData) {
     const values = Object.fromEntries(formData.entries())
     const {

@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button"
 import { redirectAll } from "@/lib/actions/auth"
 import Link from "next/link"
 import { notFound, redirect } from "next/navigation"
+import AuthModal from "../../_components/auth-modal"
 
 async function SignInPage({
     params,
@@ -14,7 +15,7 @@ async function SignInPage({
 }) {
     const pathnameArr = params["sign-in"]
 
-    await redirectAll(pathnameArr, '/auth/sign-in', 'sign-in')
+    await redirectAll(pathnameArr, "/auth/sign-in", "sign-in")
 
     const session = await auth()
     const user = session?.user
@@ -24,14 +25,9 @@ async function SignInPage({
     }
 
     return (
-        <div className="flex flex-col gap-4 rounded-xl bg-white p-6 shadow-md">
+        <AuthModal>
             <AuthOptions redirectTo={searchParams.callbackUrl} />
-            <Button asChild>
-                <Link href={'/'}>
-                    Go back to home
-                </Link>
-            </Button>
-        </div>
+        </AuthModal>
     )
 }
 

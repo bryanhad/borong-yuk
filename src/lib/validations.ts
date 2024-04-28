@@ -1,8 +1,20 @@
 import { Conditions } from "@/types"
 import { z } from "zod"
 
+const profilePictureSchema = z
+    .custom<File | undefined>()
+    .refine(
+        (file) =>
+            !file || (file instanceof File && file.type.startsWith("image/")),
+        "Must be an image file",
+    )
+    .refine((file) => {
+        return !file || file.size < 1024 * 1024 * 2
+    }, "File must be less than 2MB")
+
 export const updateCustomerProfileSchema = z.object({
     name: z.string().trim().min(1, "Cannot be empty"),
+    image: profilePictureSchema
 })
 
 export type UpdateCustomerProfileValues = z.infer<

@@ -12,30 +12,47 @@ import {
 } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
 import { useToast } from "@/components/ui/use-toast"
-import { UpdateCustomerProfileValues, updateCustomerProfileSchema } from "@/lib/validations";
+import {
+    UpdateCustomerProfileValues,
+    updateCustomerProfileSchema,
+} from "@/lib/validations"
 
 import { zodResolver } from "@hookform/resolvers/zod"
 import { User } from "next-auth"
 import { useForm } from "react-hook-form"
 import { updateCustomerProfile } from "./actions"
+import LoadingButton from "@/components/LoadingButton"
+import ImageKit from "@/components/ImageKit"
+import Image from "next/image"
+import { useState } from "react"
 
 interface SettingsFormProps {
     user: User
 }
 
 export default function SettingsForm({ user }: SettingsFormProps) {
+    const [selectedImage, setSelectedImage] = useState<string>()
     const { toast } = useToast()
 
     const form = useForm<UpdateCustomerProfileValues>({
         resolver: zodResolver(updateCustomerProfileSchema),
         defaultValues: {
-          name: user.name || "",
+            image: undefined,
+            name: user.name || "",
         },
-      })
+    })
 
     async function onSubmit(values: UpdateCustomerProfileValues) {
+        const formData = new FormData()
+
+        Object.entries(values).forEach(([key, value]) => {
+            if (value) {
+                formData.append(key, value)
+            }
+        })
+
         try {
-            await updateCustomerProfile(values)
+            await updateCustomerProfile(formData)
             toast({ description: "Profile updated!" })
         } catch (error) {
             toast({
@@ -56,6 +73,53 @@ export default function SettingsForm({ user }: SettingsFormProps) {
                     >
                         <FormField
                             control={form.control}
+                            name="image"
+                            render={({
+                                field: { value, ...restOfFieldValues },
+                            }) => (
+                                <FormItem>
+                                    <FormLabel>Profile Picture</FormLabel>
+                                    <div className="h-[150px] w-[150px]">
+                                        <Image
+                                            src={
+                                                selectedImage ||
+                                                user.image ||
+                                                ""
+                                            }
+                                            alt={`${user.name}'s profile picture`}
+                                            width={150}
+                                            height={150}
+                                            className="h-full w-full rounded-full border-2 border-input/60 object-cover "
+                                        />
+                                    </div>
+                                    <FormControl>
+                                        <Input
+                                            {...restOfFieldValues}
+                                            type="file"
+                                            accept="image/*"
+                                            // we have to make some adjustments to our onChange, cuz by default input with "file" type will return a FileList, but our schema expects a File type, so we just have to give the schema a File type instead.
+                                            onChange={(e) => {
+                                                const file = e.target.files?.[0]
+                                                restOfFieldValues.onChange(file)
+                                                setSelectedImage(
+                                                    file
+                                                        ? URL.createObjectURL(
+                                                              file,
+                                                          )
+                                                        : undefined,
+                                                )
+                                            }}
+                                        />
+                                    </FormControl>
+                                    <FormDescription>
+                                        Your public username
+                                    </FormDescription>
+                                    <FormMessage />
+                                </FormItem>
+                            )}
+                        />
+                        <FormField
+                            control={form.control}
                             name="name"
                             render={({ field }) => (
                                 <FormItem>
@@ -73,12 +137,12 @@ export default function SettingsForm({ user }: SettingsFormProps) {
                                 </FormItem>
                             )}
                         />
-                        <Button
+                        <LoadingButton
                             type="submit"
-                            disabled={form.formState.isSubmitting}
+                            loading={form.formState.isSubmitting}
                         >
                             Submit
-                        </Button>
+                        </LoadingButton>
                     </form>
                 </Form>
             </section>

@@ -1,7 +1,7 @@
 "use client"
 
 import imageKitLoader from "@/lib/image-kit-loader"
-import Image, { ImageLoaderProps, ImageProps } from "next/image"
+import Image, { ImageProps } from "next/image"
 
 const ImageKit = ({ alt, sizes, height, width, ...props }: ImageProps) => {
     return (

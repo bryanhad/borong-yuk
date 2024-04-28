@@ -1,6 +1,5 @@
 "use client"
 
-import { Card, CardContent } from "@/components/ui/card"
 import {
     Carousel,
     CarouselContent,
@@ -30,7 +29,7 @@ function HeroCarousel() {
                         <Image
                             className="h-full w-full object-fill"
                             alt={`Carousel banner ${index + 1}`}
-                            src={`/assets/carousel-${index + 1}.jpg`}
+                            src={`/assets/carousel-${index + 1}.png`}
                             width={1000}
                             height={300}
                         />
